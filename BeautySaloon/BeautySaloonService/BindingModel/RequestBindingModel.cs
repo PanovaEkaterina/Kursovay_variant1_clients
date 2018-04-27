@@ -1,16 +1,14 @@
 ﻿using System;
 
-namespace BeautySaloonModels
+namespace BeautySaloonService.BindingModel
 {
-    public class Request
+    public class RequestBindingModel
     {
         public int Id { get; set; }
 
         public int KlientId { get; set; }
 
         public int RequestProcedureId { get; set; }
-
-        public string ProcedureName { get; set; }
 
         public int PaymentId { get; set; }
 
@@ -21,14 +19,5 @@ namespace BeautySaloonModels
         public DateTime Date { get; set; }
 
         public DateTime Time { get; set; }
-
-        public PaymentState Status { get; set; }
-
-        public virtual Klient Klient { get; set; }
-
-        public virtual RequestProcedure RequestProcedure { get; set; }
-
-        public virtual Payment Payment { get; set; }
-
     }
 }

@@ -47,6 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModel\KlientBindingModel.cs" />
+    <Compile Include="BindingModel\PaymentBindingModel.cs" />
+    <Compile Include="BindingModel\ProcedureBindingModel.cs" />
+    <Compile Include="BindingModel\RequestBindingModel.cs" />
+    <Compile Include="BindingModel\RequestProcedureBindingModel.cs" />
+    <Compile Include="ImplementationsList\MainService.cs" />
+    <Compile Include="ImplementationsList\KlientService.cs" />
+    <Compile Include="Interfaces\IKlientService.cs" />
+    <Compile Include="Interfaces\IMainService.cs" />
+    <Compile Include="Interfaces\IProcedureService.cs" />
     <Compile Include="Migrations\201804271803483_FirstMigration.cs" />
     <Compile Include="Migrations\201804271803483_FirstMigration.Designer.cs">
       <DependentUpon>201804271803483_FirstMigration.cs</DependentUpon>
@@ -54,6 +64,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SaloonDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\KlientViewModel.cs" />
+    <Compile Include="ViewModel\PaymentViewModel.cs" />
+    <Compile Include="ViewModel\ProcedureViewModel.cs" />
+    <Compile Include="ViewModel\RequestProcedureViewModel.cs" />
+    <Compile Include="ViewModel\RequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -70,5 +85,6 @@
       <DependentUpon>201804271803483_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
