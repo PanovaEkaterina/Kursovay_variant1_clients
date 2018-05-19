@@ -30,5 +30,7 @@ namespace BeautySaloonModels
 
         public virtual Master Master { get; set; }
 
+        public virtual Admin Admin { get; set; }
+
     }
 }
