@@ -1,6 +1,6 @@
-﻿namespace BeautySaloonModels
+﻿namespace BeautySaloonService.BindingModel
 {
-    public class ProcedureMaterial
+    public class ProcedureMaterialBindingModel
     {
         public int Id { get; set; }
 
@@ -9,9 +9,5 @@
         public int MaterialId { get; set; }
 
         public int Count { get; set; }
-
-        public virtual Procedure Procedure { get; set; }
-
-        public virtual Material Material { get; set; }
     }
 }
