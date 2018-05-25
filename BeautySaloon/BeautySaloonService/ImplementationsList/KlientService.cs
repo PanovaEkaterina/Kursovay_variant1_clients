@@ -28,7 +28,7 @@ namespace BeautySaloonService.ImplementationsList
             {
                 Id = model.Id,
                 KlientFIO = model.KlientFIO,
-                KlientLogin = model.KlientLogin,
+                Mail = model.Mail,
                 KlientPassword = model.KlientPassword,
                 Requests = null,
             });
@@ -57,8 +57,9 @@ namespace BeautySaloonService.ImplementationsList
                 return new KlientViewModel
                 {
                     Id = element.Id,
-                    KlientLogin = element.KlientLogin,
                     KlientFIO = element.KlientFIO,
+                    Mail = element.Mail,
+                    KlientPassword = element.KlientPassword
                 };
             }
             throw new Exception("Элемент не найден");
@@ -69,9 +70,10 @@ namespace BeautySaloonService.ImplementationsList
             List<KlientViewModel> result = context.Klients.Select(rec => new KlientViewModel
             {
                 Id = rec.Id,
-                KlientLogin = rec.KlientLogin,
                 KlientFIO = rec.KlientFIO,
-            })
+                Mail = rec.Mail,
+                KlientPassword = rec.KlientPassword
+        })
                 .ToList();
             return result;
         }
@@ -91,6 +93,8 @@ namespace BeautySaloonService.ImplementationsList
             }
             element.KlientFIO = model.KlientFIO;
             element.Id = model.Id;
+            element.Mail = model.Mail;
+            element.KlientPassword = model.KlientPassword;
             context.SaveChanges();
         }
 
@@ -120,33 +124,13 @@ namespace BeautySaloonService.ImplementationsList
                 }
                 string login = firstName + "." + namePath + ((position > 1) ? position + "" : "");
 
-                Klient Klient = context.Klients.FirstOrDefault(rec => rec.KlientLogin.Equals(login));
+                Klient Klient = context.Klients.FirstOrDefault(rec => rec.KlientFIO.Equals(login));
 
                 if (Klient == null)
                 {
                     return login;
                 }
             }
-        }
-
-        public void CreatePremium(BonusesBindingModel model)
-        {
-            Klient element = context.Klients.FirstOrDefault(rec => rec.Id == model.KlientId);
-            if (element == null)
-            {
-                throw new Exception("Элемент не найден");
-            }
-            context.SaveChanges();
-        }
-
-        public void DecreatePremium(BonusesBindingModel model)
-        {
-            Klient element = context.Klients.FirstOrDefault(rec => rec.Id == model.KlientId);
-            if (element == null)
-            {
-                throw new Exception("Элемент не найден");
-            }
-            context.SaveChanges();
-        }
+        }                
     }
 }

@@ -11,5 +11,7 @@ namespace BeautySaloonService.Interfaces
         void CreateRequest(RequestBindingModel model);
 
         void PayRequest(RequestBindingModel model);
+
+        void DelElement(int id);
     }
 }

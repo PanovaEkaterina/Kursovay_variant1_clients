@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BeautySaloonService.BindingModel;
+using System.Collections.Generic;
 
 namespace BeautySaloonService.ViewModel
 {
@@ -10,6 +11,5 @@ namespace BeautySaloonService.ViewModel
 
         public decimal Price { get; set; }
 
-        public List<ProcedureMaterialViewModel> ProcedureMasters { get; set; }
     }
 }

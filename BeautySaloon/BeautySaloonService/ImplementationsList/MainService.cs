@@ -25,21 +25,16 @@ namespace BeautySaloonService.ImplementationsList
                 {
                     Id = rec.Id,
                     KlientId = rec.KlientId,
-                    ProcedureId = rec.ProcedureId,
-                    MasterId = rec.MasterId,
+                    ZakazId = rec.ZakazId,
                     DateCreate = SqlFunctions.DateName("dd", rec.DateCreate) + " " +
                                 SqlFunctions.DateName("mm", rec.DateCreate) + " " +
                                 SqlFunctions.DateName("yyyy", rec.DateCreate),
-                    DateImplement = rec.DateImplement == null ? "" :
-                                        SqlFunctions.DateName("dd", rec.DateImplement.Value) + " " +
-                                        SqlFunctions.DateName("mm", rec.DateImplement.Value) + " " +
-                                        SqlFunctions.DateName("yyyy", rec.DateImplement.Value),
                     Status = rec.Status.ToString(),
-                    Count = rec.Count,
                     Sum = rec.Sum,
+                    SumPay = rec.SumPay,
+                    DateVisit = rec.DateVisit,
                     KlientFIO = rec.Klient.KlientFIO,
-                    ProcedureName = rec.Procedure.ProcedureName,
-                    MasterFIO = rec.Master.MasterFIO
+                    ZakazName = rec.Zakaz.ZakazName,
                 })
                 .ToList();
             return result;
@@ -50,11 +45,12 @@ namespace BeautySaloonService.ImplementationsList
             context.Requests.Add(new Request
             {
                 KlientId = model.KlientId,
-                ProcedureId = model.ProcedureId,
+                ZakazId = model.ZakazId,
                 DateCreate = DateTime.Now,
-                Count = model.Count,
+                DateVisit = model.DataVisit,
                 Sum = model.Sum,
-                Status = PaymentState.Не_оплачено
+                SumPay = model.SumPay,
+                Status = PaymentState.Не_оплачен
             });
             context.SaveChanges();
         }
@@ -63,10 +59,36 @@ namespace BeautySaloonService.ImplementationsList
         {
             context.Requests.Add(new Request
             {
-                Sum = model.Sum,
-                Status = PaymentState.Принят
+                SumPay = model.SumPay,
+                Status = PaymentState.Оплачен
             });
             context.SaveChanges();
+        }
+
+        public void DelElement(int id)
+        {
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    Request element = context.Requests.FirstOrDefault(rec => rec.Id == id);
+                    if (element != null)
+                    {
+                        context.Requests.Remove(element);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
     }
 }

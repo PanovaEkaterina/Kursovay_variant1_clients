@@ -17,33 +17,17 @@ namespace BeautySaloonService.ImplementationsList
             this.context = context;
         }
 
-        public void AddElement(ProcedureBindingModel model)
+        public List<ProcedureViewModel> GetList()
         {
-            Procedure element = context.Procedures.FirstOrDefault(rec => rec.ProcedureName == model.ProcedureName);
-            if (element != null)
-            {
-                throw new Exception("Уже есть путешествие с таким названием");
-            }
-            context.Procedures.Add(new Procedure
-            {
-                ProcedureName = model.ProcedureName,
-                Price = model.Price
-            });
-            context.SaveChanges();
-        }
-
-        public void DelElement(int id)
-        {
-            Procedure element = context.Procedures.FirstOrDefault(rec => rec.Id == id);
-            if (element != null)
-            {
-                context.Procedures.Remove(element);
-                context.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Элемент не найден");
-            }
+            List<ProcedureViewModel> result = context.Procedures
+                .Select(rec => new ProcedureViewModel
+                {
+                    Id = rec.Id,
+                    ProcedureName = rec.ProcedureName,
+                    Price = rec.Price
+                })
+                .ToList();
+            return result;
         }
 
         public ProcedureViewModel GetElement(int id)
@@ -61,25 +45,28 @@ namespace BeautySaloonService.ImplementationsList
             throw new Exception("Элемент не найден");
         }
 
-        public List<ProcedureViewModel> GetList()
+        public void AddElement(ProcedureBindingModel model)
         {
-            List<ProcedureViewModel> result = context.Procedures.Select(rec => new ProcedureViewModel
+            Procedure element = context.Procedures.FirstOrDefault(rec => rec.ProcedureName == model.ProcedureName);
+            if (element != null)
             {
-                Id = rec.Id,
-                ProcedureName = rec.ProcedureName,
-                Price = rec.Price
-            })
-            .ToList();
-            return result;
+                throw new Exception("Уже есть услуга с таким названием");
+            }
+            context.Procedures.Add(new Procedure
+            {
+                ProcedureName = model.ProcedureName, 
+                Price = model.Price
+            });
+            context.SaveChanges();
         }
 
         public void UpdElement(ProcedureBindingModel model)
         {
             Procedure element = context.Procedures.FirstOrDefault(rec =>
-            rec.ProcedureName == model.ProcedureName && rec.Id != model.Id);
+                                        rec.ProcedureName == model.ProcedureName && rec.Id != model.Id);
             if (element != null)
             {
-                throw new Exception("Уже есть путешествие с таким названием");
+                throw new Exception("Уже есть услуга с таким названием");
             }
             element = context.Procedures.FirstOrDefault(rec => rec.Id == model.Id);
             if (element == null)
@@ -87,8 +74,22 @@ namespace BeautySaloonService.ImplementationsList
                 throw new Exception("Элемент не найден");
             }
             element.ProcedureName = model.ProcedureName;
-            element.Id = model.Id;
+            element.Price = model.Price;
             context.SaveChanges();
+        }
+
+        public void DelElement(int id)
+        {
+            Procedure element = context.Procedures.FirstOrDefault(rec => rec.Id == id);
+            if (element != null)
+            {
+                context.Procedures.Remove(element);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Элемент не найден");
+            }
         }
     }
 }
