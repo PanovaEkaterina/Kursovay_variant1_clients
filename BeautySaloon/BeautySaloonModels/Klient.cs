@@ -11,8 +11,7 @@ namespace BeautySaloonModels
         [Required]
         public string KlientFIO { get; set; }
 
-        [Required]
-        public string KlientLogin { get; set; }
+        public string Mail { get; set; }
 
         [Required]
         public string KlientPassword { get; set; }

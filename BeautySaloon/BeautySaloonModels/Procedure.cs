@@ -12,12 +12,9 @@ namespace BeautySaloonModels
         public string ProcedureName { get; set; }
 
         [Required]
-        public decimal Price{ get; set; }
+        public decimal Price { get; set; }
 
         [ForeignKey("ProcedureId")]
-        public virtual List<Request> Requests { get; set; }
-
-        [ForeignKey("ProcedureId")]
-        public virtual List<ProcedureMaterial> ProcedureMaterials { get; set; }
+        public virtual List<ZakazProcedure> ZakazProcedures { get; set; }
     }
 }

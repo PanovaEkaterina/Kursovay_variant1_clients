@@ -18,55 +18,116 @@ namespace BeautySaloonService.ImplementationsList
             this.context = context;
         }
 
-        public List<RequestViewModel> GetList()
+        public List<RequestViewModel> GetList(int id)
         {
-            List<RequestViewModel> result = context.Requests
+            List<RequestViewModel> result = context.Requests.Where(rec => rec.KlientId == id)
                 .Select(rec => new RequestViewModel
                 {
                     Id = rec.Id,
                     KlientId = rec.KlientId,
-                    ProcedureId = rec.ProcedureId,
-                    MasterId = rec.MasterId,
+                    ZakazId = rec.ZakazId,
                     DateCreate = SqlFunctions.DateName("dd", rec.DateCreate) + " " +
                                 SqlFunctions.DateName("mm", rec.DateCreate) + " " +
                                 SqlFunctions.DateName("yyyy", rec.DateCreate),
-                    DateImplement = rec.DateImplement == null ? "" :
-                                        SqlFunctions.DateName("dd", rec.DateImplement.Value) + " " +
-                                        SqlFunctions.DateName("mm", rec.DateImplement.Value) + " " +
-                                        SqlFunctions.DateName("yyyy", rec.DateImplement.Value),
                     Status = rec.Status.ToString(),
-                    Count = rec.Count,
                     Sum = rec.Sum,
+                    SumPay=rec.SumPay,
+                    DateVisit = rec.DateVisit,
                     KlientFIO = rec.Klient.KlientFIO,
-                    ProcedureName = rec.Procedure.ProcedureName,
-                    MasterFIO = rec.Master.MasterFIO
+                    ZakazName = rec.Zakaz.ZakazName,
                 })
                 .ToList();
             return result;
         }
-
+        
         public void CreateRequest(RequestBindingModel model)
         {
             context.Requests.Add(new Request
             {
                 KlientId = model.KlientId,
-                ProcedureId = model.ProcedureId,
+                ZakazId = model.ZakazId,
                 DateCreate = DateTime.Now,
-                Count = model.Count,
+                DateVisit = model.DataVisit,
                 Sum = model.Sum,
-                Status = PaymentState.Не_оплачено
+                Status = PaymentState.Не_оплачен
             });
             context.SaveChanges();
         }
 
         public void PayRequest(RequestBindingModel model)
         {
-            context.Requests.Add(new Request
+            using (var transaction = context.Database.BeginTransaction())
             {
-                Sum = model.Sum,
-                Status = PaymentState.Принят
-            });
-            context.SaveChanges();
+                try
+                {
+
+                    Request element = context.Requests.FirstOrDefault(rec => rec.Id == model.Id);
+                    if (element == null)
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                    element.SumPay = model.SumPay;
+                    element.Status = PaymentState.Оплачен;
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public void PayPartRequest(RequestBindingModel model)
+        {
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+
+                    Request element = context.Requests.FirstOrDefault(rec => rec.Id == model.Id);
+                    if (element == null)
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                    element.SumPay = model.SumPay;
+                    element.Status = PaymentState.Оплачен_частично;
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public void DelElement(int id)
+        {
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    Request element = context.Requests.FirstOrDefault(rec => rec.Id == id);
+                    if (element != null)
+                    {
+                        context.Requests.Remove(element);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
     }
 }
