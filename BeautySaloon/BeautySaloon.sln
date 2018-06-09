@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautySaloonModels", "Beaut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewWPFKlient", "ViewWPFKlient\ViewWPFKlient.csproj", "{DEDA4574-D22B-4E41-BA42-08B30D2AAB28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewAdmin", "ViewWPFAdmin\ViewAdmin.csproj", "{4AD73514-A06C-4DEE-8521-B544731C003B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{DEDA4574-D22B-4E41-BA42-08B30D2AAB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEDA4574-D22B-4E41-BA42-08B30D2AAB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEDA4574-D22B-4E41-BA42-08B30D2AAB28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AD73514-A06C-4DEE-8521-B544731C003B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AD73514-A06C-4DEE-8521-B544731C003B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AD73514-A06C-4DEE-8521-B544731C003B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AD73514-A06C-4DEE-8521-B544731C003B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

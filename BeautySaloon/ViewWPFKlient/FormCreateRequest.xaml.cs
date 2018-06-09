@@ -18,19 +18,20 @@ namespace ViewWPFKlient
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly IKlientService serviceK;
-
         private readonly IZakazService serviceZ;
 
         private readonly IMainService serviceM;
 
-        public FormCreateRequest(IKlientService serviceK, IZakazService serviceZ, IMainService serviceM)
+        public int Id { set { id = value; } }
+
+        private int id;
+
+        public FormCreateRequest(IZakazService serviceZ, IMainService serviceM)
         {
             InitializeComponent();
             Loaded += FormCreateRequest_Load;
             comboBoxZakaz.SelectionChanged += comboBoxZakaz_SelectedIndexChanged;
             comboBoxZakaz.SelectionChanged += new SelectionChangedEventHandler(comboBoxZakaz_SelectedIndexChanged);
-            this.serviceK = serviceK;
             this.serviceZ = serviceZ;
             this.serviceM = serviceM;
         }
@@ -39,15 +40,7 @@ namespace ViewWPFKlient
         {
             try
             {
-                List<KlientViewModel> listK = serviceK.GetList();
-                if (listK != null)
-                {
-                    comboBoxKlient.DisplayMemberPath = "KlientFIO";
-                    comboBoxKlient.SelectedValuePath = "Id";
-                    comboBoxKlient.ItemsSource = listK;
-                    comboBoxKlient.SelectedItem = null;
-                }
-                List<ZakazViewModel> listZ = serviceZ.GetList();
+                List<ZakazViewModel> listZ = serviceZ.GetList(id);
                 if (listZ != null)
                 {
                     comboBoxZakaz.DisplayMemberPath = "ZakazName";
@@ -91,11 +84,6 @@ namespace ViewWPFKlient
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (comboBoxKlient.SelectedItem == null)
-            {
-                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
             if (comboBoxZakaz.SelectedItem == null)
             {
                 MessageBox.Show("Выберите заказ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -116,11 +104,10 @@ namespace ViewWPFKlient
             {
                 serviceM.CreateRequest(new RequestBindingModel
                 {
-                    KlientId = ((KlientViewModel)comboBoxKlient.SelectedItem).Id,
+                    KlientId = id,
                     ZakazId = ((ZakazViewModel)comboBoxZakaz.SelectedItem).Id,
                     Sum = Convert.ToDecimal(textBoxSum.Text),
                     DataVisit = datePickerDay.SelectedDate.ToString(),
-                    SumPay = 0,
 
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);

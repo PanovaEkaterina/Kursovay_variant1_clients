@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewWPFKlient"
         mc:Ignorable="d"
-        Title="FormReg" Height="297.61" Width="394.821">
+        Title="Регистрация" Height="297.61" Width="394.821">
     <Grid Margin="0,0,-8,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130*"/>

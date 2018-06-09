@@ -1,5 +1,4 @@
 ﻿using BeautySaloonModels;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 namespace BeautySaloonService

@@ -20,9 +20,13 @@ namespace ViewWPFKlient
 
         public int Id { set { id = value; } }
 
+        public int ID { set { iD= value; } }
+
         private readonly IZakazService service;
 
         private int? id;
+
+        private int iD;
 
         private List<ZakazProcedureViewModel> zakazProcedures;
 
@@ -157,6 +161,7 @@ namespace ViewWPFKlient
                     {
                         Id = id.Value,
                         ZakazName = textBoxName.Text,
+                        KlientID=iD,
                         Price = Convert.ToDecimal(textBoxPrice.Text),
                         ZakazProcedures = productComponentBM
                     });
@@ -166,6 +171,7 @@ namespace ViewWPFKlient
                     service.AddElement(new ZakazBindingModel
                     {
                         ZakazName = textBoxName.Text,
+                        KlientID = iD,
                         Price = Convert.ToDecimal(textBoxPrice.Text),
                         ZakazProcedures = productComponentBM
                     });

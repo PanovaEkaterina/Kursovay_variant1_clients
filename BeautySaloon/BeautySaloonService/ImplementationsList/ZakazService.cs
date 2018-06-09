@@ -17,13 +17,14 @@ namespace BeautySaloonService.ImplementationsList
             this.context = context;
         }
 
-        public List<ZakazViewModel> GetList()
+        public List<ZakazViewModel> GetList(int id)
         {
-            List<ZakazViewModel> result = context.Zakazs
+            List<ZakazViewModel> result = context.Zakazs.Where(rec => rec.KlientID == id)
                 .Select(rec => new ZakazViewModel
                 {
                     Id = rec.Id,
                     ZakazName = rec.ZakazName,
+                    KlientID= rec.KlientID,
                     Price = rec.Price,
                     ZakazProcedures = context.ZakazProcedures
                             .Where(recPC => recPC.ZakazId == rec.Id)
@@ -50,6 +51,7 @@ namespace BeautySaloonService.ImplementationsList
                 {
                     Id = element.Id,
                     ZakazName = element.ZakazName,
+                    KlientID=element.KlientID,
                     Price = element.Price,
                     ZakazProcedures = context.ZakazProcedures
                             .Where(recPC => recPC.ZakazId == element.Id)
@@ -73,19 +75,17 @@ namespace BeautySaloonService.ImplementationsList
             {
                 try
                 {
+                    
                     Zakaz element = context.Zakazs.FirstOrDefault(rec => rec.ZakazName == model.ZakazName);
-                    if (element != null)
-                    {
-                        throw new Exception("Уже есть заказ с таким названием");
-                    }
                     element = new Zakaz
                     {
                         ZakazName = model.ZakazName,
+                        KlientID = model.KlientID,
                         Price = model.Price
                     };
                     context.Zakazs.Add(element);
                     context.SaveChanges();
-                    // убираем дубли по компонентам
+                    
                     var groupProcedures = model.ZakazProcedures
                                                 .GroupBy(rec => rec.ProcedureId)
                                                 .Select(rec => new
@@ -93,7 +93,7 @@ namespace BeautySaloonService.ImplementationsList
                                                     ProcedureId = rec.Key,
                                                     Price = rec.Sum(r => r.Price)
                                                 });
-                    // добавляем компоненты
+                    
                     foreach (var groupProcedure in groupProcedures)
                     {
                         context.ZakazProcedures.Add(new ZakazProcedure
@@ -135,7 +135,7 @@ namespace BeautySaloonService.ImplementationsList
                     element.Price = model.Price;
                     context.SaveChanges();
 
-                    // обновляем существуюущие компоненты
+                    
                     var compIds = model.ZakazProcedures.Select(rec => rec.ProcedureId).Distinct();
                     var updateProcedures = context.ZakazProcedures
                                                     .Where(rec => rec.ZakazId == model.Id &&
@@ -150,7 +150,7 @@ namespace BeautySaloonService.ImplementationsList
                                         context.ZakazProcedures.Where(rec => rec.ZakazId == model.Id &&
                                                                             !compIds.Contains(rec.ProcedureId)));
                     context.SaveChanges();
-                    // новые записи
+                    
                     var groupProcedures = model.ZakazProcedures
                                                 .Where(rec => rec.Id == 0)
                                                 .GroupBy(rec => rec.ProcedureId)
@@ -199,7 +199,7 @@ namespace BeautySaloonService.ImplementationsList
                     Zakaz element = context.Zakazs.FirstOrDefault(rec => rec.Id == id);
                     if (element != null)
                     {
-                        // удаяем записи по компонентам при удалении изделия
+                        
                         context.ZakazProcedures.RemoveRange(
                                             context.ZakazProcedures.Where(rec => rec.ZakazId == id));
                         context.Zakazs.Remove(element);

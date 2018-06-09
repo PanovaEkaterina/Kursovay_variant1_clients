@@ -5,12 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewWPFKlient"
         mc:Ignorable="d"
-       Title="Оплата" Height="120" Width="362.714">
-    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-        <Label x:Name="label" Content="Сумма:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="buttonSave" Content="Сохранить" HorizontalAlignment="Left" Margin="152,53,0,0" VerticalAlignment="Top" Width="75" Click="buttonSave_Click"/>
-        <Button x:Name="buttonCancel" Content="Отмена" HorizontalAlignment="Left" Margin="245,53,0,0" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click"/>
-        <TextBox x:Name="textBoxSum" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Margin="107,10,0,0"/>
+       Title="Оплата" Height="249.627" Width="362.714">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0,0,0,-2">
+        <Label x:Name="label" Content="Сумма оплаты:" HorizontalAlignment="Left" Margin="11,134,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="buttonSave" Content="Сохранить" HorizontalAlignment="Left" Margin="138,174,0,0" VerticalAlignment="Top" Width="75" Click="buttonSave_Click"/>
+        <Button x:Name="buttonCancel" Content="Отмена" HorizontalAlignment="Left" Margin="245,174,0,0" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click"/>
+        <TextBox x:Name="textBoxSum" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Margin="108,137,0,0"/>
+        <Label x:Name="label_Summ" Content="Сумма заказа:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Payment" Content="Оплачено:" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxSumpay" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Margin="107,55,0,0" IsEnabled="False"/>
+        <TextBox x:Name="textBoxSumm" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Margin="107,13,0,0" IsEnabled="False"/>
+        <Label x:Name="label_Zadol" Content="Задолженность:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxZadol" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Margin="108,96,0,0" IsEnabled="False"/>
 
     </Grid>
 </Window>

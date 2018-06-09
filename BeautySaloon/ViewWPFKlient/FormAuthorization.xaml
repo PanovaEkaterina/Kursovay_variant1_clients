@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewWPFKlient"
         mc:Ignorable="d"
-        Title="Авторизация" Height="222.311" Width="341.036">
+        Title="Авторизация" Height="214.153" Width="366.53">
     <Grid Margin="0,0,0,17">
-        <TextBox x:Name="textBoxFIO" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Margin="131,36,0,0"/>
-        <TextBox x:Name="textBoxPass" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Margin="131,79,0,0"/>
-        <Label Content="Имя пользователя" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,33,0,0" Width="124"/>
-        <Label Content="Пароль" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,79,0,0" Width="68"/>
-        <Button x:Name="buttonSave" Content="Войти" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,132,0,0" Click="buttonSave_Click"/>
-        <Button x:Name="buttonCancel" Content="Отмена" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="192,132,0,0" Click="buttonCancel_Click"/>
+        <TextBox x:Name="textBoxFIO" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Margin="131,51,0,0"/>
+        <TextBox x:Name="textBoxPass" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Margin="131,93,0,0"/>
+        <Label Content="Имя пользователя" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,48,0,0" Width="124"/>
+        <Label Content="Пароль" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,90,0,0" Width="68"/>
+        <Button x:Name="buttonSave" Content="Войти" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="83,137,0,0" Click="buttonSave_Click"/>
+        <Button x:Name="buttonCancel" Content="Отмена" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="192,137,0,0" Click="buttonCancel_Click"/>
+        <Button Content="Регистрация" HorizontalAlignment="Left" Height="21" Margin="245,10,0,0" VerticalAlignment="Top" Width="104" Click="buttonReg_Click"/>
     </Grid>
 </Window>

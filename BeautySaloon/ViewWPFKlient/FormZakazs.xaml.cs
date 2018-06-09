@@ -3,7 +3,6 @@ using BeautySaloonService.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using Unity;
 using Unity.Attributes;
 
@@ -18,6 +17,10 @@ namespace ViewWPFKlient
         public new IUnityContainer Container { get; set; }
 
         private readonly IZakazService service;
+
+        public int Id { set { id = value; } }
+
+        private int id;
 
         public FormZakazs(IZakazService service)
         {
@@ -35,13 +38,13 @@ namespace ViewWPFKlient
         {
             try
             {
-                List<ZakazViewModel> list = service.GetList();
+                List<ZakazViewModel> list = service.GetList(id);
                 if (list != null)
                 {
                     dataGridViewZakazs.ItemsSource = list;
                     dataGridViewZakazs.Columns[0].Visibility = Visibility.Hidden;
-                    dataGridViewZakazs.Columns[1].Width = DataGridLength.Auto;
-                    dataGridViewZakazs.Columns[3].Visibility = Visibility.Hidden;
+                    dataGridViewZakazs.Columns[4].Visibility = Visibility.Hidden;
+                    dataGridViewZakazs.Columns[2].Visibility = Visibility.Hidden;
                 }
             }
             catch (Exception ex)
@@ -64,6 +67,7 @@ namespace ViewWPFKlient
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormZakaz>();
+            form.ID = id;
             if (form.ShowDialog() == true)
                 LoadData();
         }

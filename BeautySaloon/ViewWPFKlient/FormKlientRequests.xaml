@@ -6,7 +6,7 @@
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
         xmlns:local="clr-namespace:ViewWPFKlient"
         mc:Ignorable="d"
-        Title="FormKlientRequests" Height="450" Width="800">
+        Title="Отчеты по заказам" Height="450" Width="800">
     <Grid>
         <DockPanel HorizontalAlignment="Left" Height="66" LastChildFill="False" VerticalAlignment="Top" Width="792">
             <DockPanel.Background>

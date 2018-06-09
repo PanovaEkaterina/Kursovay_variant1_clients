@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs" />
     <Compile Include="Klient.cs" />
     <Compile Include="Procedure.cs" />
     <Compile Include="PaymentState.cs" />

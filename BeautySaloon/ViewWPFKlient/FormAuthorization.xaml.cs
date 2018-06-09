@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BeautySaloonModels;
+using BeautySaloonService;
+using System;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
 using Unity;
 using Unity.Attributes;
@@ -13,22 +16,17 @@ namespace ViewWPFKlient
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        string AdminLogin = "admin";
-        string AdminPassword = "admin";
-        public FormAuthorization()
+
+        private SaloonDbContext context;
+
+        public FormAuthorization(SaloonDbContext context)
         {
             InitializeComponent();
+            this.context = context;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (textBoxFIO.Text == AdminLogin && textBoxPass.Text==AdminPassword)
-            {
-                Close();
-                var form = Container.Resolve<ViewAdmin.FormMain>();
-                form.ShowDialog();
-            }
-
             if (string.IsNullOrEmpty(textBoxFIO.Text))
             {
                 MessageBox.Show("Заполните ФИО", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -54,12 +52,12 @@ namespace ViewWPFKlient
             }
             if (count == 1)
             {
-           
-                Close();
-                var form = Container.Resolve<FormMain>();
+                Klient element = context.Klients.FirstOrDefault(kl => kl.KlientFIO == textBoxFIO.Text & kl.KlientPassword== textBoxPass.Text);
+                int id = element.Id;
                 
+                var form = Container.Resolve<FormMain>();
+                form.Id = id;
                 form.ShowDialog();
-
 
             }
             else
@@ -71,6 +69,12 @@ namespace ViewWPFKlient
         {
             DialogResult = false;
             Close();
+        }
+
+        private void buttonReg_Click(object sender, RoutedEventArgs e)
+        {
+            var form = Container.Resolve<FormReg>();
+            form.ShowDialog();
         }
     }
 }

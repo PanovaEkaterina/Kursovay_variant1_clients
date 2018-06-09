@@ -8,10 +8,11 @@
         Title="Личный кабинет" Height="234.445" Width="692.73" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <Grid Height="205" VerticalAlignment="Top" Margin="0,0,0,-2">
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="559" Margin="10,0,0,0">
-            <MenuItem Header="Заказы" Height="22" Width="105">
+            <MenuItem Header="Заказы" Height="22" Width="80">
                 <MenuItem Header="Добавить" HorizontalAlignment="Left" Height="28" Width="148" Margin="10,0,-44,0" Click="заказыToolStripMenuItem_Click"/>
             </MenuItem>
             <MenuItem Header="Отчеты" Height="22" Width="105">
+                <MenuItem Header="Прайс изделий" Height="28" Margin="0,0,-27,0" Click="прайсToolStripMenuItem_Click"/>
                 <MenuItem Header="Отчеты по оплате" Height="28" Margin="0,0,-27,0" Click="заказыКлиентаToolStripMenuItem_Click"/>
             </MenuItem>
 

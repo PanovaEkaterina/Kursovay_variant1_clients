@@ -8,6 +8,8 @@ namespace BeautySaloonService.ViewModel
 
         public string ZakazName { get; set; }
 
+        public int KlientID { get; set; }
+
         public decimal Price { get; set; }
 
         public List<ZakazProcedureViewModel> ZakazProcedures { get; set; }

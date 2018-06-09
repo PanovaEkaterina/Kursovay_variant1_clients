@@ -1,4 +1,5 @@
-﻿using BeautySaloonService.Interfaces;
+﻿using BeautySaloonService;
+using BeautySaloonService.Interfaces;
 using BeautySaloonService.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -17,21 +18,26 @@ namespace ViewWPFKlient
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
+        private SaloonDbContext context;
+
         private readonly IMainService service;
 
-        //private readonly IReportService reportService;
+        public int Id { set { id = value; } }
 
-        public FormMain(IMainService service)
+        private int id;
+
+        public FormMain(IMainService service, SaloonDbContext context)
         {
             InitializeComponent();
             this.service = service;
-        }
-
+            this.context = context;
+        }     
+               
         private void LoadData()
         {
             try
             {
-                List<RequestViewModel> list = service.GetList();
+                List<RequestViewModel> list = service.GetList(id);
                 if (list != null)
                 {
                     dataGridView.ItemsSource = list;
@@ -50,12 +56,21 @@ namespace ViewWPFKlient
         private void заказыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormZakazs>();
+            form.Id = id;
+            form.ShowDialog();
+        }
+
+        private void прайсToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormSendMail>();
+            form.Id = id;
             form.ShowDialog();
         }
 
         private void buttonCreateRequest_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateRequest>();
+            form.Id = id;
             form.ShowDialog();
             LoadData();
         }
@@ -103,6 +118,7 @@ namespace ViewWPFKlient
         private void заказыКлиентаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormKlientRequests>();
+            form.Id = id;
             form.ShowDialog();
         }
     }

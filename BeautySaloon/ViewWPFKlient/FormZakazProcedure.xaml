@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewWPFKlient"
         mc:Ignorable="d"
-         Title="Выберите услуги" Height="157.275" Width="319.469">
-    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0,0,0,-1">
+         Title="Выберите услуги" Height="159.345" Width="319.469">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0,0,0,1">
         <Grid.RowDefinitions>
             <RowDefinition Height="176*"/>
             <RowDefinition/>
@@ -15,8 +15,8 @@
         <Label x:Name="labelCount" Content="Цена:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBoxProcedure" HorizontalAlignment="Left" Margin="76,14,0,0" VerticalAlignment="Top" Width="221" RenderTransformOrigin="1.075,0.691" />
         <TextBox x:Name="textBoxPrice" Height="23" Margin="76,44,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" IsEnabled="False"/>
-        <Button x:Name="buttonSave" Content="Сохранить" HorizontalAlignment="Left" Margin="111,84,0,0" VerticalAlignment="Top" Width="75" Click="buttonSave_Click"/>
-        <Button x:Name="buttonCancel" Content="Отмена" HorizontalAlignment="Left" Margin="222,84,0,0" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click"/>
+        <Button x:Name="buttonSave" Content="Сохранить" HorizontalAlignment="Left" Margin="116,85,0,0" VerticalAlignment="Top" Width="75" Click="buttonSave_Click"/>
+        <Button x:Name="buttonCancel" Content="Отмена" HorizontalAlignment="Left" Margin="222,85,0,0" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click"/>
 
     </Grid>
 </Window>

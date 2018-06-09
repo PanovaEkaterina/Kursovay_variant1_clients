@@ -15,12 +15,12 @@ namespace ViewWPFKlient
     public partial class App : Application
     {
         [STAThread]
-        public static void Main()
+         static void Main()
         {
             var container = BuildUnityContainer();
 
             var application = new App();
-            application.Run(container.Resolve<FormBasic>());
+            application.Run(container.Resolve<FormAuthorization>());
 
         }
 
@@ -28,8 +28,8 @@ namespace ViewWPFKlient
         {
             var currentContainer = new UnityContainer();
             currentContainer.RegisterType<DbContext, SaloonDbContext>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IKlientService, KlientService>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProcedureService, ProcedureService>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IKlientService, KlientService>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IZakazService, ZakazService>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMainService, MainService>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IReportService, ReportService>(new HierarchicalLifetimeManager());

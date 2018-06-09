@@ -107,22 +107,22 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FormSendMail.xaml.cs">
+      <DependentUpon>FormSendMail.xaml</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormAuthorization.xaml.cs">
       <DependentUpon>FormAuthorization.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FormBasic.xaml.cs">
-      <DependentUpon>FormBasic.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormCreateRequest.xaml.cs">
       <DependentUpon>FormCreateRequest.xaml</DependentUpon>
@@ -188,17 +188,9 @@
       <Project>{1A9A1B8F-91D7-4175-9020-14E7A3705156}</Project>
       <Name>BeautySaloonService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ViewWPFAdmin\ViewAdmin.csproj">
-      <Project>{4ad73514-a06c-4dee-8521-b544731c003b}</Project>
-      <Name>ViewAdmin</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="FormAuthorization.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FormBasic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FormReg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormSendMail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

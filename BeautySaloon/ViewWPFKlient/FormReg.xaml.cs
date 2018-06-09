@@ -65,11 +65,6 @@ namespace ViewWPFKlient
                         MessageBox.Show("Неверный формат для электронной почты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    if(pass.Length>8)
-                    {
-                        MessageBox.Show("Пароль должен содержать меньше 8 символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
                 }             
                 if (id.HasValue)
                 {

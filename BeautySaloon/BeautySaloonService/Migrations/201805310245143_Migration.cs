@@ -3,7 +3,7 @@ namespace BeautySaloonService.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FirstMigration : DbMigration
+    public partial class Migration : DbMigration
     {
         public override void Up()
         {
@@ -43,6 +43,7 @@ namespace BeautySaloonService.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         ZakazName = c.String(nullable: false),
+                        KlientID = c.Int(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.Id);

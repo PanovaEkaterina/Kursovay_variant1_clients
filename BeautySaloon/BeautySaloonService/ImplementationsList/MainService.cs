@@ -18,9 +18,9 @@ namespace BeautySaloonService.ImplementationsList
             this.context = context;
         }
 
-        public List<RequestViewModel> GetList()
+        public List<RequestViewModel> GetList(int id)
         {
-            List<RequestViewModel> result = context.Requests
+            List<RequestViewModel> result = context.Requests.Where(rec => rec.KlientId == id)
                 .Select(rec => new RequestViewModel
                 {
                     Id = rec.Id,
@@ -31,7 +31,7 @@ namespace BeautySaloonService.ImplementationsList
                                 SqlFunctions.DateName("yyyy", rec.DateCreate),
                     Status = rec.Status.ToString(),
                     Sum = rec.Sum,
-                    SumPay = rec.SumPay,
+                    SumPay=rec.SumPay,
                     DateVisit = rec.DateVisit,
                     KlientFIO = rec.Klient.KlientFIO,
                     ZakazName = rec.Zakaz.ZakazName,
@@ -39,7 +39,7 @@ namespace BeautySaloonService.ImplementationsList
                 .ToList();
             return result;
         }
-
+        
         public void CreateRequest(RequestBindingModel model)
         {
             context.Requests.Add(new Request
@@ -49,7 +49,6 @@ namespace BeautySaloonService.ImplementationsList
                 DateCreate = DateTime.Now,
                 DateVisit = model.DataVisit,
                 Sum = model.Sum,
-                SumPay = model.SumPay,
                 Status = PaymentState.Не_оплачен
             });
             context.SaveChanges();
@@ -57,12 +56,52 @@ namespace BeautySaloonService.ImplementationsList
 
         public void PayRequest(RequestBindingModel model)
         {
-            context.Requests.Add(new Request
+            using (var transaction = context.Database.BeginTransaction())
             {
-                SumPay = model.SumPay,
-                Status = PaymentState.Оплачен
-            });
-            context.SaveChanges();
+                try
+                {
+
+                    Request element = context.Requests.FirstOrDefault(rec => rec.Id == model.Id);
+                    if (element == null)
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                    element.SumPay = model.SumPay;
+                    element.Status = PaymentState.Оплачен;
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public void PayPartRequest(RequestBindingModel model)
+        {
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+
+                    Request element = context.Requests.FirstOrDefault(rec => rec.Id == model.Id);
+                    if (element == null)
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                    element.SumPay = model.SumPay;
+                    element.Status = PaymentState.Оплачен_частично;
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
 
         public void DelElement(int id)

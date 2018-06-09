@@ -8,6 +8,8 @@ namespace BeautySaloonService.BindingModel
 
         public string ZakazName { get; set; }
 
+        public int KlientID { get; set; }
+
         public decimal Price { get; set; }
 
         public List<ZakazProcedureBindingModel> ZakazProcedures { get; set; }

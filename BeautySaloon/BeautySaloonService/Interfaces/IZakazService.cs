@@ -6,7 +6,7 @@ namespace BeautySaloonService.Interfaces
 {
     public interface IZakazService
     {
-        List<ZakazViewModel> GetList();
+        List<ZakazViewModel> GetList(int id);
 
         ZakazViewModel GetElement(int id);
 

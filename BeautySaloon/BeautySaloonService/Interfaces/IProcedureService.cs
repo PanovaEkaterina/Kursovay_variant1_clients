@@ -9,11 +9,5 @@ namespace BeautySaloonService.Interfaces
         List<ProcedureViewModel> GetList();
 
         ProcedureViewModel GetElement(int id);
-
-        void AddElement(ProcedureBindingModel model);
-
-        void UpdElement(ProcedureBindingModel model);
-
-        void DelElement(int id);
     }
 }

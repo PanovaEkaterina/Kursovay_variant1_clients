@@ -6,10 +6,12 @@ namespace BeautySaloonService.Interfaces
 {
     public interface IReportService
     {
-        void SaveZakazPrice(ReportBindingModel model);
+        void SaveProcedurePriceDocx(ReportBindingModel model);
 
-        List<KlientRequestsModel> GetKlientRequests(ReportBindingModel model);
+        void SaveProcedurePriceExcel(ReportBindingModel model);
 
-        void SaveKlientRequests(ReportBindingModel model);
+        List<KlientRequestsModel> GetKlientRequests(ReportBindingModel model, int id);
+
+        void SaveKlientRequests(ReportBindingModel model, int id);
     }
 }

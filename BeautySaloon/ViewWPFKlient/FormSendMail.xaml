@@ -1,0 +1,19 @@
+﻿<Window x:Class="ViewWPFKlient.FormSendMail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViewWPFKlient"
+        mc:Ignorable="d"
+        Title="Отправить на почту" Height="268.5" Width="591.5">
+    <Grid Margin="0,0,0,14">
+        <TextBox x:Name="textBoxMail" HorizontalAlignment="Left" Height="32" Margin="203,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="338"/>
+        <Label Content="Изменить mail" HorizontalAlignment="Left" Height="32" Margin="56,65,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label Content="Выберите формат" HorizontalAlignment="Left" Height="29" Margin="56,123,0,0" VerticalAlignment="Top" Width="109"/>
+        <CheckBox x:Name="checkBoxWord" Content="Word" HorizontalAlignment="Left" Height="29" Margin="203,129,0,0" VerticalAlignment="Top" Width="98"/>
+        <CheckBox x:Name="checkBoxExcel" Content="Excel" HorizontalAlignment="Left" Height="29" Margin="368,129,0,0" VerticalAlignment="Top" Width="116"/>
+        <Button x:Name="buttonCancel" Content="Отмена" HorizontalAlignment="Left" Height="29" Margin="427,168,0,0" VerticalAlignment="Top" Width="114" Click="buttonCancel_Click"/>
+        <Button x:Name="buttonMail" Content="Отправить" HorizontalAlignment="Left" Height="29" Margin="203,168,0,0" VerticalAlignment="Top" Width="114" Click="buttonMail_Click"/>
+
+    </Grid>
+</Window>
